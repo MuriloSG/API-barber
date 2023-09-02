@@ -3,10 +3,11 @@ import {
   createServico,
   getServico,
 } from "../controllers/servicos.controller.js";
+import {autentificacaoMiddleware} from "../middlewares/autentificacao.middlewares.js";
 const router = Router();
 
 // rota para criar serviço.
-router.post("/", createServico);
+router.post("/", autentificacaoMiddleware, createServico);
 
 // Listando servicos.
 router.get("/", getServico);

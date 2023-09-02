@@ -24,7 +24,7 @@ const createServico = async (req, res) => {
       descricao_servico,
       preco_servico,
       datacriacao_servico,
-      userADM: { _id: "64f33a5fb246d747e8801264" },
+      userADM: req.UserId,
     });
     if (!servicos) {
       return res.status(400).send({ message: "Erro ao criar serviço" });
@@ -37,7 +37,7 @@ const createServico = async (req, res) => {
         descricao_servico,
         preco_servico,
         datacriacao_servico,
-        userADM: { _id: "64f33a5fb246d747e8801264" },
+        userADM: req.UserId,
       },
     });
   } catch (error) {

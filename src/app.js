@@ -12,7 +12,7 @@ const app = express();
 //Mostrar para o express ler body com json.
 app.use(express.json());
 
-//Usando rota de useuarios
+//Usando rota de usuarios
 app.use("/usuarios", userRoute);
 
 //Usando rota de useuarios administradores.
