@@ -5,6 +5,7 @@ import userRoute from "./routes/user.route.js";
 import autentificacaoRoute from "./routes/autentificacao.route.js";
 import userADMRoute from "./routes/userADM.route.js";
 import servicosRoute from "./routes/servicos.route.js";
+import agendaRoute from "./routes/agenda.route.js";
 
 //Criando uma instancia para o express.
 const app = express();
@@ -23,6 +24,9 @@ app.use("/autentificacao", autentificacaoRoute);
 
 //Usando rota de Serviços.
 app.use("/servicos", servicosRoute);
+
+//Usando rota de Agenda.
+app.use("/agenda", agendaRoute);
 
 //Exportando para sunir o servirdo local.
 export default app;

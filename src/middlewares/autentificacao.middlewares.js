@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import Jwt from "jsonwebtoken";
 import userADMService from "../services/userADM.service.js";
-
+import { obterIdDoServicoPorUserADM } from "../services/servicos.service.js";
 dotenv.config();
 
 export const autentificacaoMiddleware = (req, res, next) => {
@@ -29,9 +29,12 @@ export const autentificacaoMiddleware = (req, res, next) => {
         return res.status(401).send({ message: "Token invalido" });
       }
       req.UserId = userADM.id;
+      const servicoId = await obterIdDoServicoPorUserADM(userADM.id);
+      req.ServicoADM = servicoId;
+      console.log(req.ServicoADM);
       return next();
     });
   } catch (error) {
-    res.status().send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 };

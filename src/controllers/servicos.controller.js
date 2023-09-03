@@ -58,4 +58,13 @@ const getServico = async (req, res) => {
   }
 };
 
-export { createServico, getServico };
+const findById = async (req, res) => {
+  try {
+    const servicos = req.servico; // pengando serviço que o middlewares enviou.
+    res.send(servicos);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export { createServico, getServico, findById };
