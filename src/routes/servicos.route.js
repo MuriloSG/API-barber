@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {findById } from "../controllers/servicos.controller.js";
+import {findById, update } from "../controllers/servicos.controller.js";
 import {
   createServico,
   getServico,
@@ -20,6 +20,13 @@ router.get(
   globalMiddlewares.validIdServico,
   globalMiddlewares.validServico,
   findById
+);
+
+router.patch(
+  "/:id",
+  globalMiddlewares.validIdServico,
+  globalMiddlewares.validServico,
+  update
 );
 
 export default router;

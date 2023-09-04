@@ -1,4 +1,9 @@
-import { createService, findAllService, FindAllServicoDisponivel } from "../services/servicos.service.js";
+import {
+  createService,
+  findAllService,
+  FindAllServicoDisponivel,
+  updateServico,
+} from "../services/servicos.service.js";
 
 //Controller de criação de serviços.
 const createServico = async (req, res) => {
@@ -62,8 +67,7 @@ const getServico = async (req, res) => {
     const servicos = await findAllService(); //findAll() função que esta em services.
     if (servicos.length === 0) {
       res.status(400).send({ message: "Não há serviços cadastrados " });
-    }
-    else{
+    } else {
       res.send(servicos);
     }
   } catch (error) {
@@ -77,8 +81,7 @@ const getServicoDisponiveis = async (req, res) => {
     const servicos = await FindAllServicoDisponivel(); //findAll() função que esta em services.
     if (servicos.length === 0) {
       res.status(404).send({ message: "Não há serviços disponiveis " });
-    }
-    else{
+    } else {
       res.send(servicos);
     }
   } catch (error) {
@@ -95,4 +98,47 @@ const findById = async (req, res) => {
   }
 };
 
-export { createServico, getServico, findById, getServicoDisponiveis };
+//Atualizando Servico.
+const update = async (req, res) => {
+  try {
+    const {
+      titulo_servico,
+      imagem_servico,
+      descricao_servico,
+      preco_servico,
+      datacriacao_servico,
+      dia_semana,
+      hora_agendamento,
+      status_agendamento,
+    } = req.body;
+    const { id } = req.servico; // pengando serviço que o middlewares enviou.
+    if (
+      !titulo_servico &&
+      !imagem_servico &&
+      !descricao_servico &&
+      !preco_servico &&
+      !datacriacao_servico &&
+      !dia_semana &&
+      !hora_agendamento &&
+      !status_agendamento
+    ) {
+      return res.status(400).send({ message: "Mande pelo menos um campo para update" });
+    }
+    await updateServico(
+      id,
+      titulo_servico,
+      imagem_servico,
+      descricao_servico,
+      preco_servico,
+      datacriacao_servico,
+      dia_semana,
+      hora_agendamento,
+      status_agendamento
+    );
+    res.send({ message: "Servico atualizado com sucesso" });
+  } catch (error) {
+    res.status(500).send({ message: error.message});
+  }
+};
+
+export { createServico, getServico, findById, getServicoDisponiveis, update };
