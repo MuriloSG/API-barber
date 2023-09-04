@@ -34,10 +34,47 @@ const obterIdDoServicoPorUserADM = async (userId) => {
   }
 };
 
+const updateServico = (
+  id,
+  titulo_servico,
+  imagem_servico,
+  descricao_servico,
+  preco_servico,
+  datacriacao_servico,
+  dia_semana,
+  hora_agendamento,
+  status_agendamento
+) =>
+  Servicos.findByIdAndUpdate(
+    { _id: id },
+    {
+      titulo_servico,
+      imagem_servico,
+      descricao_servico,
+      preco_servico,
+      datacriacao_servico,
+      dia_semana,
+      hora_agendamento,
+      status_agendamento,
+    }
+  );
+
+  const updateStatus = (
+    id,
+    status_agendamento
+  ) =>
+    Servicos.findByIdAndUpdate(
+      { _id: id },
+      {
+        status_agendamento,
+      }
+    );
 export {
   createService,
   findAllService,
   findByIdService,
   obterIdDoServicoPorUserADM,
   FindAllServicoDisponivel,
+  updateServico,
+  updateStatus
 };
