@@ -22,13 +22,25 @@ const ServicosSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  dia_semana: {
+    type: String,
+    require: true,
+  },
+  hora_agendamento: {
+    type: String,
+    require: true,
+  },
+  status_agendamento: {
+    type: Boolean,
+    default: true,
+    require: true,
+  },
   userADM: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserADM",
     require: true,
   },
 });
-
 //Definindo Schema.
 const Servicos = mongoose.model("Servicos", ServicosSchema);
 

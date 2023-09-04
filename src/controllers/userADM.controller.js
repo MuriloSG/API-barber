@@ -22,7 +22,7 @@ const create = async (req, res) => {
 
     res.status(201).send({
       message: "Usuario criado com sucesso!",
-      user: {
+      userADM: {
         id: userADM._id, //Propriedade de id do mongoDB,ja tem o _idc proprio !
         nome,
         email,
@@ -61,7 +61,7 @@ const findById = async (req, res) => {
 //Atualizando ususario.
 const update = async (req, res) => {
   try {
-    const { nome, email, senha, Nomeusuario, telefone, avatar, papel } =
+    const { nome, email, senha, telefone, avatar, papel } =
       req.body;
     const { id, user } = req; // pengando user que o middlewares enviou.
     if (
@@ -75,7 +75,7 @@ const update = async (req, res) => {
         .status(400)
         .send({ message: "Mande pelo menos um campo para update" });
     }
-    await userService.updateService(
+    await userADMService.updateService(
       id,
       nome,
       email,
