@@ -1,6 +1,8 @@
 import {
   createService,
   findAllService,
+  eraseService,
+  findByIdServiceAgendamento,
 } from "../services/agendamentoCliente.service.js";
 
 import { updateStatus, findByIdService } from "../services/servicos.service.js";
@@ -51,4 +53,24 @@ const getAgendamemtos = async (req, res) => {
   }
 };
 
-export { createAgendamento, getAgendamemtos };
+//Controller de deletar agendamento.
+const erase = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const agendamentoCliente = await findByIdServiceAgendamento(id);
+
+    if (String(agendamentoCliente.user._id) !== req.UserId) {
+      return res.status(400).send({ message: "Não foi possivel cancelar esse agendamento" });
+    } 
+    else if (await eraseService(id)) {
+      const serviceId = agendamentoCliente.servico._id;
+      await updateStatus(serviceId, true);
+      return res.status(201).send({ message: "Agendamento cancelado com sucesso" });
+    }
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export { createAgendamento, getAgendamemtos, erase };
