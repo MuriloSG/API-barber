@@ -1,8 +1,8 @@
 import { Router } from "express";
-import {findById, update } from "../controllers/servicos.controller.js";
+import {findById, update, erase} from "../controllers/servicos.controller.js";
 import {
   createServico,
-  getServico,
+  getService,
 } from "../controllers/servicos.controller.js";
 import {autentificacaoMiddleware} from "../middlewares/autentificacao.middlewares.js";
 import globalMiddlewares from "../middlewares/global.middlewares.js";
@@ -12,7 +12,7 @@ const router = Router();
 router.post("/", autentificacaoMiddleware, createServico);
 
 // Listando servicos.
-router.get("/", getServico);
+router.get("/", getService);
 
 //Pegando Serviço por id
 router.get(
@@ -22,11 +22,15 @@ router.get(
   findById
 );
 
+//Atualizando serviço
 router.patch(
   "/:id",
   globalMiddlewares.validIdServico,
   globalMiddlewares.validServico,
   update
 );
+
+//Deletando serviço
+router.delete("/:id", autentificacaoMiddleware, erase);
 
 export default router;

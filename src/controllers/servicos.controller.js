@@ -1,8 +1,10 @@
 import {
   createService,
+  eraseService,
   findAllService,
-  FindAllServicoDisponivel,
-  updateServico,
+  findAllServiceDisponivel,
+  findByIdService,
+  updateService,
 } from "../services/servicos.service.js";
 
 //Controller de criação de serviços.
@@ -62,7 +64,7 @@ const createServico = async (req, res) => {
 };
 
 //Controller de motrar todos os serviços
-const getServico = async (req, res) => {
+const getService = async (req, res) => {
   try {
     const servicos = await findAllService(); //findAll() função que esta em services.
     if (servicos.length === 0) {
@@ -76,9 +78,9 @@ const getServico = async (req, res) => {
 };
 
 //Controller de motrar todos os serviços disponiveis
-const getServicoDisponiveis = async (req, res) => {
+const getServiceDisponiveis = async (req, res) => {
   try {
-    const servicos = await FindAllServicoDisponivel(); //findAll() função que esta em services.
+    const servicos = await findAllServiceDisponivel(); //findAll() função que esta em services.
     if (servicos.length === 0) {
       res.status(404).send({ message: "Não há serviços disponiveis " });
     } else {
@@ -122,9 +124,11 @@ const update = async (req, res) => {
       !hora_agendamento &&
       !status_agendamento
     ) {
-      return res.status(400).send({ message: "Mande pelo menos um campo para update" });
+      return res
+        .status(400)
+        .send({ message: "Mande pelo menos um campo para update" });
     }
-    await updateServico(
+    await updateService(
       id,
       titulo_servico,
       imagem_servico,
@@ -137,8 +141,31 @@ const update = async (req, res) => {
     );
     res.send({ message: "Servico atualizado com sucesso" });
   } catch (error) {
-    res.status(500).send({ message: error.message});
+    res.status(500).send({ message: error.message });
   }
 };
 
-export { createServico, getServico, findById, getServicoDisponiveis, update };
+//Deletando servico
+const erase = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const service = await findByIdService(id);
+
+    if (String(service.userADM._id) !== req.UserId) {
+      return res.status(400).send({ message: "Não foi possivel deletar esse serviço" });
+    } else if (await eraseService(id)) {
+      return res.status(201).send({ message: "Serviço deletado com sucesso" });
+    }
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+export {
+  createServico,
+  getService,
+  findById,
+  getServiceDisponiveis,
+  update,
+  erase,
+};

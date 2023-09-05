@@ -4,9 +4,11 @@ const createService = (body) => Servicos.create(body); //Servicos.create método
 
 const findAllService = () => Servicos.find().populate("userADM"); //Servicos.find método proprio do mongosse.
 
-const FindAllServicoDisponivel = async () => {
+const findAllServiceDisponivel = async () => {
   try {
-    const servicos = await Servicos.find({ status_agendamento: true }).populate('userADM');;
+    const servicos = await Servicos.find({ status_agendamento: true }).populate(
+      "userADM"
+    );
     if (!servicos) {
       res.status(400).send({
         message: "Não há serviços disponiveis ",
@@ -34,7 +36,7 @@ const obterIdDoServicoPorUserADM = async (userId) => {
   }
 };
 
-const updateServico = (
+const updateService = (
   id,
   titulo_servico,
   imagem_servico,
@@ -59,22 +61,22 @@ const updateServico = (
     }
   );
 
-  const updateStatus = (
-    id,
-    status_agendamento
-  ) =>
-    Servicos.findByIdAndUpdate(
-      { _id: id },
-      {
-        status_agendamento,
-      }
-    );
+const updateStatus = (id, status_agendamento) =>
+  Servicos.findByIdAndUpdate(
+    { _id: id },
+    {
+      status_agendamento,
+    }
+  );
+
+const eraseService = (id) => Servicos.findOneAndDelete({_id: id});
 export {
   createService,
   findAllService,
   findByIdService,
   obterIdDoServicoPorUserADM,
-  FindAllServicoDisponivel,
-  updateServico,
-  updateStatus
+  findAllServiceDisponivel,
+  updateService,
+  updateStatus,
+  eraseService
 };
