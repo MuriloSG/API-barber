@@ -37,8 +37,6 @@ export const autentificacaoMiddleware = (req, res, next) => {
 };
 
 
-
-
 export const autentificacaoMiddlewareUser = (req, res, next) => {
   try {
     const { authorization } = req.headers;
