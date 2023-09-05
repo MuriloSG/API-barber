@@ -3,28 +3,36 @@ import {
   findAllService,
 } from "../services/agendamentoCliente.service.js";
 
-import { updateStatus } from "../services/servicos.service.js";
+import { updateStatus, findByIdService } from "../services/servicos.service.js";
 
 // Controller de criação de Agendamento.
 const createAgendamento = async (req, res) => {
   try {
-    const agendaCliente = await createService({
-      user: req.UserId,
-      servico: req.servico,
-    });
-    if (!agendaCliente) {
-      return res.status(400).send({ message: "Erro ao criar agendamento" });
+    const service = await findByIdService(req.servico);
+
+    if (!service.status_agendamento) {
+      return res
+        .status(400)
+        .send({ message: "Erro ao criar agendamento não está disponível" });
     } else {
-      res.status(201).send({
-        message: "Agendamento Cliente criado com sucesso!",
-        agendamentoCliente: {
-          user: req.UserId,
-          servico: req.servico,
-        },
+      const agendaCliente = await createService({
+        user: req.UserId,
+        servico: req.servico,
       });
+      if (!agendaCliente) {
+        return res.status(400).send({ message: "Erro ao criar agendamento" });
+      } else {
+        res.status(201).send({
+          message: "Agendamento Cliente criado com sucesso!",
+          agendamentoCliente: {
+            user: req.UserId,
+            servico: req.servico,
+          },
+        });
+      }
+      const serviceId = req.servico;
+      await updateStatus(serviceId, false);
     }
-    const serviceId = req.servico;
-    await updateStatus(serviceId, false);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

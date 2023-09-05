@@ -6,7 +6,7 @@ import globalMiddlewares from "../middlewares/global.middlewares.js";
 const router = Router();
 
 router.get("/servicosdisp", getServicoDisponiveis)
-router.post("/", autentificacaoMiddlewareUser,globalMiddlewares.validIdAgendamento, globalMiddlewares.validAgendamento, createAgendamento);
+router.post("/agendar", autentificacaoMiddlewareUser,globalMiddlewares.validIdAgendamento, globalMiddlewares.validAgendamento, createAgendamento);
 router.get("/", getAgendamemtos);
 
 export default router;

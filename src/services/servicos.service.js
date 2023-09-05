@@ -6,7 +6,7 @@ const findAllService = () => Servicos.find().populate("userADM"); //Servicos.fin
 
 const FindAllServicoDisponivel = async () => {
   try {
-    const servicos = await Servicos.find({ status_agendamento: true });
+    const servicos = await Servicos.find({ status_agendamento: true }).populate('userADM');;
     if (!servicos) {
       res.status(400).send({
         message: "Não há serviços disponiveis ",

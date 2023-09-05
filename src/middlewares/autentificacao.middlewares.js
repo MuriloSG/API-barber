@@ -24,7 +24,6 @@ export const autentificacaoMiddleware = (req, res, next) => {
       if (erro) {
         return res.status(401).send({ message: "Token invalido" });
       }
-      console.log(decoded);
       const userADM = await userADMService.findByIdServiceADM(decoded.id);
       if (!userADM || !userADM.id) {
         return res.status(401).send({ message: "Token invalido" });
@@ -59,7 +58,6 @@ export const autentificacaoMiddlewareUser = (req, res, next) => {
       if (erro) {
         return res.status(401).send({ message: "Token invalido" });
       }
-      console.log(decoded);
       const user = await userService.findByIdService(decoded.id);
       if (!user || !user.id) {
         return res.status(401).send({ message: "Token invalido" });
