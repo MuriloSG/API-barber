@@ -7,7 +7,7 @@ import {
 
 import { updateStatus, findByIdService } from "../services/servicos.service.js";
 
-// Controller de criação de Agendamento.
+// Criação de Agendamento.
 const createAgendamento = async (req, res) => {
   try {
     const service = await findByIdService(req.servico);
@@ -40,7 +40,7 @@ const createAgendamento = async (req, res) => {
   }
 };
 
-// Controller de pegar Agenda
+// Mostrar Agenda
 const getAgendamemtos = async (req, res) => {
   try {
     const agendasClientes = await findAllService();
@@ -53,7 +53,7 @@ const getAgendamemtos = async (req, res) => {
   }
 };
 
-//Controller de deletar agendamento.
+//Deletar agendamento.
 const erase = async (req, res) => {
   try {
     const id = req.params.id;
