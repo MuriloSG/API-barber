@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-//Criando schema serviços.
 const ServicosSchema = new mongoose.Schema({
   titulo_servico: {
     type: String,
@@ -41,7 +40,6 @@ const ServicosSchema = new mongoose.Schema({
     require: true,
   },
 });
-//Definindo Schema.
 const Servicos = mongoose.model("Servicos", ServicosSchema);
 
 export default Servicos;
