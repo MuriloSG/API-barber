@@ -7,7 +7,7 @@ import {
   updateService,
 } from "../services/servicos.service.js";
 
-//Controller de criação de serviços.
+//Criação de serviços.
 const createServico = async (req, res) => {
   try {
     const {
@@ -63,10 +63,10 @@ const createServico = async (req, res) => {
   }
 };
 
-//Controller de motrar todos os serviços
+//Mostrar todos os serviços
 const getService = async (req, res) => {
   try {
-    const servicos = await findAllService(); //findAll() função que esta em services.
+    const servicos = await findAllService();
     if (servicos.length === 0) {
       res.status(400).send({ message: "Não há serviços cadastrados " });
     } else {
@@ -77,10 +77,10 @@ const getService = async (req, res) => {
   }
 };
 
-//Controller de motrar todos os serviços disponiveis
+//Motrar todos os serviços disponiveis
 const getServiceDisponiveis = async (req, res) => {
   try {
-    const servicos = await findAllServiceDisponivel(); //findAll() função que esta em services.
+    const servicos = await findAllServiceDisponivel();
     if (servicos.length === 0) {
       res.status(404).send({ message: "Não há serviços disponiveis " });
     } else {
@@ -93,7 +93,7 @@ const getServiceDisponiveis = async (req, res) => {
 
 const findById = async (req, res) => {
   try {
-    const servicos = req.servico; // pengando serviço que o middlewares enviou.
+    const servicos = req.servico;
     res.send(servicos);
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -113,7 +113,7 @@ const update = async (req, res) => {
       hora_agendamento,
       status_agendamento,
     } = req.body;
-    const { id } = req.servico; // pengando serviço que o middlewares enviou.
+    const { id } = req.servico;
     if (
       !titulo_servico &&
       !imagem_servico &&
