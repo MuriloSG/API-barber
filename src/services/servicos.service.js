@@ -1,9 +1,8 @@
 import Servicos from "../models/Servicos.js";
 
-const createService = (body) => Servicos.create(body); //Servicos.create método proprio do mongosse.
+const createService = (body) => Servicos.create(body);
 
-const findAllService = () => Servicos.find().populate("userADM"); //Servicos.find método proprio do mongosse.
-
+const findAllService = () => Servicos.find().populate("userADM");
 const findAllServiceDisponivel = async () => {
   try {
     const servicos = await Servicos.find({ status_agendamento: true }).populate(
