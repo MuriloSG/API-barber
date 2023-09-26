@@ -1,10 +1,10 @@
 import UserADM from "../models/UserADM.js";
 
-const createService = (body) => UserADM.create(body); //UserADM.create método proprio do mongosse.
+const createService = (body) => UserADM.create(body);
 
-const findAllService = () => UserADM.find(); //UserADM.find método proprio do mongosse.
+const findAllService = () => UserADM.find(); 
 
-const findByIdServiceADM = (id) => UserADM.findById(id); //UserADM.findById método proprio do mongosse.
+const findByIdServiceADM = (id) => UserADM.findById(id);
 
 const updateService = (id, nome, email, telefone, avatar) =>
   UserADM.findByIdAndUpdate(
@@ -15,7 +15,5 @@ const updateService = (id, nome, email, telefone, avatar) =>
       telefone,
       avatar
     }
-  ); //UserADM.findByIdAndUpdate método proprio do mongosse, atualiza pelo id os campos que recebeu, se rercebeu apenas um atributo o patch atualiza ele apenas.
-
-//Exportando create
+  ); 
 export default { createService, findAllService, findByIdServiceADM, updateService};
