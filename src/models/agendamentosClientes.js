@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-//Criando schema AgendaCliente.
 const AgendaClienteSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -18,7 +17,6 @@ const AgendaClienteSchema = new mongoose.Schema({
   },
 });
 
-//Definindo Schema.
 const AgendaCliente = mongoose.model("AgendaCliente", AgendaClienteSchema);
 
 export default AgendaCliente;
