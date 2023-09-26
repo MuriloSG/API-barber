@@ -6,7 +6,7 @@ import {
   GerarTokenADM,
 } from "../services/autentificacao.service.js";
 
-//Função para fazer o login.
+//Fazer o login.
 const login = async (req, res) => {
   const { email, senha } = req.body;
 
@@ -17,7 +17,7 @@ const login = async (req, res) => {
       return res.status(404).send({ message: "Usuario ou Senha invalida" });
     }
 
-    //variavel boleana para verificar se a senha digitada corresponde a algum usuario do DB, usando bcryptcompare(Senhadigtada, SenhaDB).
+    //variavel boleana para verificar se a senha digitada corresponde a algum usuario do DB, usando bcryptcompare(Senha digitada, SenhaDB).
     const senhaValida = await bcrypt.compare(senha, user.senha);
     if (!senhaValida) {
       return res.status(404).send({ message: "Usuario ou Senha invalida" });
@@ -30,7 +30,7 @@ const login = async (req, res) => {
   }
 };
 
-//Função para fazer o login do administrador.
+//Fazer login do administrador.
 const loginADM = async (req, res) => {
   const { email, senha } = req.body;
 
