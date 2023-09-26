@@ -1,6 +1,6 @@
 import userService from "../services/user.service.js";
 
-//Postando usuarios.
+//Criação usuarios.
 const create = async (req, res) => {
   try {
     const { id, nome, email, senha, Nomeusuario, telefone, avatar } =
@@ -16,7 +16,7 @@ const create = async (req, res) => {
       res.status(400).send({ message: "Dados não preenchidos" });
     }
 
-    const user = await userService.createService(req.body); //Await para esperar isso retornar algo,userService.createService(req.body) função que esta em services.
+    const user = await userService.createService(req.body);
     if (!user) {
       return res.status(400).send({ message: "Erro create usuario" });
     }
@@ -24,7 +24,7 @@ const create = async (req, res) => {
     res.status(201).send({
       message: "Usuario criado com sucesso!",
       user: {
-        id: user._id, //Propriedade de id do mongoDB,ja tem o _idc proprio !
+        id: user._id,
         nome,
         email,
         Nomeusuario,
@@ -37,10 +37,10 @@ const create = async (req, res) => {
   }
 };
 
-//Buscando todos usuarios.
+//Mostrar todos usuarios.
 const findAll = async (req, res) => {
   try {
-    const users = await userService.findAllService(); //userService.findAll() função que esta em services.
+    const users = await userService.findAllService();
     if (users.length === 0) {
       res.status(400).send({ message: "Não há usuarios cadastrados " });
     }
@@ -50,22 +50,22 @@ const findAll = async (req, res) => {
   }
 };
 
-//Buscando usuario por id.
+//Mostrar usuario por id.
 const findById = async (req, res) => {
   try {
-    const user = req.user; // pengando user que o middlewares enviou.
+    const user = req.user;
     res.send(user);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
 
-//Atualizando ususario.
+//Atualizando usuario.
 const update = async (req, res) => {
   try {
     const { nome, email, senha, Nomeusuario, telefone, avatar, papel } =
       req.body;
-    const { id, user } = req; // pengando user que o middlewares enviou.
+    const { id, user } = req;
     if (
       !nome &&
       !email &&
