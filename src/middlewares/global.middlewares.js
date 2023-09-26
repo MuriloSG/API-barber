@@ -5,8 +5,6 @@ import { findByIdService } from "../services/servicos.service.js";
 const validId = (req, res, next) => {
   try {
     const id = req.params.id;
-
-    //Verificando se o ID é valido, com propriedade do mongoose
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).send({ message: "Id invalido" });
     }
