@@ -8,13 +8,10 @@ import {autentificacaoMiddleware} from "../middlewares/autentificacao.middleware
 import globalMiddlewares from "../middlewares/global.middlewares.js";
 const router = Router();
 
-// rota para criar serviço.
 router.post("/", autentificacaoMiddleware, createServico);
 
-// Listando servicos.
 router.get("/", getService);
 
-//Pegando Serviço por id
 router.get(
   "/:id",
   globalMiddlewares.validIdServico,
@@ -22,7 +19,6 @@ router.get(
   findById
 );
 
-//Atualizando serviço
 router.patch(
   "/:id",
   globalMiddlewares.validIdServico,
@@ -30,7 +26,6 @@ router.patch(
   update
 );
 
-//Deletando serviço
 router.delete("/:id", autentificacaoMiddleware, erase);
 
 export default router;
