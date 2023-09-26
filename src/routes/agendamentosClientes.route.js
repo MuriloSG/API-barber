@@ -9,10 +9,8 @@ import { getServiceDisponiveis } from "../controllers/servicos.controller.js";
 import globalMiddlewares from "../middlewares/global.middlewares.js";
 const router = Router();
 
-//Listando Serviços disponíveis.
 router.get("/servicosdisp", getServiceDisponiveis);
 
-//Criando um agendamento.
 router.post(
   "/agendar",
   autentificacaoMiddlewareUser,
@@ -21,10 +19,8 @@ router.post(
   createAgendamento
 );
  
-//Listando todos agendamentos.
 router.get("/", getAgendamemtos);
 
-//Deletando agendamento.
 router.delete("/:id", autentificacaoMiddlewareUser, erase);
 
 export default router;
